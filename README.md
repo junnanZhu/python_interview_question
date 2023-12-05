@@ -305,7 +305,7 @@ def get_lines():
 ```
 Pandaaaa906提供的方法
 ```python
-from mmap import mmap //
+from mmap import mmap //导入 Python 中的 mmap 模块，用于将文件映射到内存，以便更快地进行读取。
 
 
 def get_lines(fp):
