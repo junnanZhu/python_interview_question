@@ -1287,7 +1287,40 @@ global 变量 设置使用全局变量
 不确定会有多少参数会传入时，就可以使用两个参数
 
 ### 63.Mysql怎么限制IP访问？
+1. MySQL 用户权限控制：
+在 MySQL 中，你可以通过创建用户并设置访问权限来限制来自特定 IP 地址的访问。以下是一个简单的步骤：
 
+创建 MySQL 用户：
+
+sql
+Copy code
+CREATE USER 'your_user'@'your_ip' IDENTIFIED BY 'your_password';
+授予用户权限：
+
+sql
+Copy code
+GRANT ALL PRIVILEGES ON your_database.* TO 'your_user'@'your_ip';
+刷新权限：
+
+sql
+Copy code
+FLUSH PRIVILEGES;
+2. 防火墙规则：
+在服务器级别，你也可以使用防火墙规则来限制访问。这可以通过系统自带的防火墙工具（例如 iptables）来完成。以下是一个简单的 iptables 示例，假设 MySQL 默认使用 3306 端口：
+
+bash
+Copy code
+sudo iptables -A INPUT -p tcp --dport 3306 -s your_ip -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 3306 -j DROP
+这两条规则的含义是允许来自 your_ip 的流量通过 3306 端口，拒绝其他所有流量。请根据你的具体需求修改 IP 地址和端口号。
+
+3. MySQL 配置文件：
+你还可以通过修改 MySQL 的配置文件来限制访问。编辑 MySQL 的配置文件（通常是 /etc/mysql/my.cnf 或 /etc/my.cnf）：
+
+ini
+Copy code
+bind-address = your_ip
+设置 bind-address 为你希望 MySQL 监听的 IP 地址。这将使 MySQL 只接受来自指定 IP 地址的连接。
 
 
 ### 64.带参数的装饰器?
