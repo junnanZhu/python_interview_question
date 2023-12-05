@@ -305,7 +305,7 @@ def get_lines():
 ```
 Pandaaaa906提供的方法
 ```python
-from mmap import mmap
+from mmap import mmap //
 
 
 def get_lines(fp):
